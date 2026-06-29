@@ -1,6 +1,6 @@
 # Stampede: A Modern Buffalo Hackathon Starter
 
-A multi-tenant, full-stack hackathon starter application built with **Buffalo** (Go), **Svelte 5**, **Tailwind CSS v4**, and **DaisyUI**. 
+A multi-tenant, full-stack hackathon starter application built with **Buffalo** (Go), **Svelte 5**, **Tailwind CSS v4**, and **DaisyUI**. This starter is designed for an agentic workflow in which you use its skills to design landing pages and mockups for your site, then it can help build systems architectural specifications, API and database schema design, and then generate the initial implementation for your features (code, migrations, etc.). It even includes some documentation about how to deploy it on Google Cloud, as well as other platforms.
 
 ![Stampede](stampede.png)
 
