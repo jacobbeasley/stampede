@@ -1,0 +1,15 @@
+#!/bin/bash
+# Automatically clean migrations/schema.sql before running buffalo test
+if [ "$1" = "test" ]; then
+    go run "$(dirname "$0")/scripts/clean_schema.go"
+fi
+
+# Execute the real buffalo command from PATH, skipping the local one to prevent infinite recursion.
+# Standard way to find the real executable in PATH ignoring the current directory:
+REAL_BUFFALO=$(which -a buffalo | grep -v "$(dirname "$0")" | head -n 1)
+
+if [ -n "$REAL_BUFFALO" ]; then
+    exec "$REAL_BUFFALO" "$@"
+else
+    exec buffalo "$@"
+fi

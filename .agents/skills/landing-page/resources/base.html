@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Title</title>
+    
+    <!-- SEO & Open Graph Tags -->
+    <meta name="description" content="Engaging description of the landing page.">
+    <meta property="og:title" content="Landing Page Title">
+    <meta property="og:description" content="Engaging description of the landing page.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- DaisyUI v5 & Tailwind CSS v4 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/daisyui.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <style type="text/tailwindcss">
+        @theme {
+            --font-sans: 'Inter', sans-serif;
+            --font-display: 'Outfit', sans-serif;
+        }
+    </style>
+    
+    <!-- Theme Switcher Script -->
+    <script src="theme.js"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; }
+    </style>
+</head>
+<body class="min-h-screen bg-base-100 text-base-content antialiased flex flex-col">
+    
+    <!-- Theme Picker (Floating Top Right) -->
+    <div class="fixed bottom-4 right-4 z-50 lg:top-4 lg:bottom-auto">
+        <select class="select select-bordered select-sm w-full max-w-xs theme-selector bg-base-100 shadow-lg" onchange="setTheme(this.value)">
+            <option disabled selected>Theme</option>
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="cupcake">Cupcake</option>
+            <option value="corporate">Corporate</option>
+            <option value="synthwave">Synthwave</option>
+            <option value="retro">Retro</option>
+            <option value="cyberpunk">Cyberpunk</option>
+            <option value="valentine">Valentine</option>
+            <option value="halloween">Halloween</option>
+            <option value="garden">Garden</option>
+            <option value="forest">Forest</option>
+            <option value="aqua">Aqua</option>
+            <option value="lofi">LoFi</option>
+            <option value="pastel">Pastel</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="wireframe">Wireframe</option>
+            <option value="black">Black</option>
+            <option value="luxury">Luxury</option>
+            <option value="dracula">Dracula</option>
+            <option value="cmyk">CMYK</option>
+            <option value="autumn">Autumn</option>
+            <option value="business">Business</option>
+            <option value="acid">Acid</option>
+            <option value="lemonade">Lemonade</option>
+            <option value="night">Night</option>
+            <option value="coffee">Coffee</option>
+            <option value="winter">Winter</option>
+            <option value="dim">Dim</option>
+            <option value="nord">Nord</option>
+            <option value="sunset">Sunset</option>
+        </select>
+    </div>
+
+    <!-- Navigation -->
+    <div class="bg-base-100 shadow-sm">
+        <nav class="navbar max-w-7xl mx-auto px-4 lg:px-8">
+            <div class="navbar-start">
+                <div class="dropdown">
+                    <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                    </ul>
+                </div>
+                <a class="btn btn-ghost text-xl font-display font-bold">BrandLogo</a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                </ul>
+            </div>
+            <div class="navbar-end gap-2">
+                <a class="btn btn-ghost hidden sm:flex">Log In</a>
+                <a class="btn btn-primary">Sign Up</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT START -->
+    <main class="flex-grow">
+        
+        <!-- Hero Section -->
+        <section class="hero min-h-[70vh] bg-base-200">
+            <div class="hero-content text-center px-4">
+                <div class="max-w-2xl">
+                    <h1 class="text-5xl lg:text-6xl font-bold font-display leading-tight mb-6">Build something amazing with our platform</h1>
+                    <p class="py-6 text-lg text-base-content/80">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mt-4">
+                        <button class="btn btn-primary btn-lg">Get Started Now</button>
+                        <button class="btn btn-outline btn-lg">View Documentation</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 px-4 max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold font-display mb-4">Why Choose Us</h2>
+                <p class="text-base-content/70 max-w-xl mx-auto">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="card bg-base-100 shadow-xl border border-base-200">
+                    <div class="card-body items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                        </div>
+                        <h3 class="card-title font-display">Lightning Fast</h3>
+                        <p class="text-base-content/70">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="card bg-base-100 shadow-xl border border-base-200">
+                    <div class="card-body items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                        </div>
+                        <h3 class="card-title font-display">Highly Secure</h3>
+                        <p class="text-base-content/70">Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="card bg-base-100 shadow-xl border border-base-200">
+                    <div class="card-body items-center text-center">
+                        <div class="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center text-accent mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        </div>
+                        <h3 class="card-title font-display">Beautiful Design</h3>
+                        <p class="text-base-content/70">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="py-20 bg-base-200 px-4">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-3xl lg:text-4xl font-bold font-display text-center mb-16">What Our Users Say</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Review 1 -->
+                    <div class="card bg-base-100 shadow-md">
+                        <div class="card-body">
+                            <div class="rating rating-sm mb-4">
+                                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-1" class="mask mask-star-2 bg-orange-400" checked />
+                            </div>
+                            <p class="italic text-base-content/80 mb-6">"Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="avatar">
+                                    <div class="w-12 rounded-full">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="User avatar" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">John Doe</h4>
+                                    <p class="text-sm text-base-content/60">CEO, TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Review 2 -->
+                    <div class="card bg-base-100 shadow-md">
+                        <div class="card-body">
+                            <div class="rating rating-sm mb-4">
+                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" />
+                                <input type="radio" name="rating-2" class="mask mask-star-2 bg-orange-400" checked />
+                            </div>
+                            <p class="italic text-base-content/80 mb-6">"Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem."</p>
+                            <div class="flex items-center gap-4">
+                                <div class="avatar">
+                                    <div class="w-12 rounded-full">
+                                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="User avatar" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Jane Smith</h4>
+                                    <p class="text-sm text-base-content/60">Designer, CreativeStudio</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-24 px-4 max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold font-display mb-6">Ready to transform your workflow?</h2>
+            <p class="text-lg text-base-content/70 mb-8">Join thousands of users who are already building the future with our platform.</p>
+            <div class="flex flex-col sm:flex-row gap-2 justify-center max-w-md mx-auto">
+                <input type="email" placeholder="Enter your email" class="input input-bordered w-full" />
+                <button class="btn btn-primary">Subscribe</button>
+            </div>
+            <p class="text-sm text-base-content/50 mt-4">No credit card required. Cancel anytime.</p>
+        </section>
+
+    </main>
+    <!-- MAIN CONTENT END -->
+
+    <!-- Footer -->
+    <div class="bg-base-300 mt-auto">
+        <footer class="footer grid grid-cols-1 md:grid-cols-3 gap-8 p-10 text-base-content max-w-7xl mx-auto">
+            <aside>
+                <div class="text-3xl font-display font-bold mb-2">BrandLogo</div>
+                <p>ACME Industries Ltd.<br>Providing reliable tech since 1992</p>
+            </aside> 
+            <nav>
+                <header class="footer-title text-base-content/50 font-semibold uppercase tracking-wider text-xs mb-3">Services</header> 
+                <a class="link link-hover">Branding</a> 
+                <a class="link link-hover">Design</a> 
+                <a class="link link-hover">Marketing</a> 
+                <a class="link link-hover">Advertisement</a>
+            </nav> 
+            <nav>
+                <header class="footer-title text-base-content/50 font-semibold uppercase tracking-wider text-xs mb-3">Company & Legal</header> 
+                <a class="link link-hover">About us</a> 
+                <a class="link link-hover">Contact</a> 
+                <a class="link link-hover">Terms of use</a> 
+                <a class="link link-hover">Privacy policy</a>
+            </nav>
+        </footer>
+    </div>
+
+</body>
+</html>

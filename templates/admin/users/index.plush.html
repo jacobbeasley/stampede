@@ -1,0 +1,76 @@
+<div class="container mx-auto px-4 py-8">
+  <% let is_current_super_admin = false %>
+  <%= for (r) in current_user.Roles { %>
+    <%= if (r.ID == "SUPER_ADMIN") { is_current_super_admin = true } %>
+  <% } %>
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Manage Users: <%= current_organization.Name %>
+    </h1>
+    <a href="/admin/users/new" class="btn btn-primary">Add User</a>
+  </div>
+
+  <div class="overflow-x-auto bg-base-100 shadow-xl rounded-box">
+    <table class="table w-full">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Roles</th>
+          <th>Created At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for (user) in users { %>
+          <tr>
+            <td>
+              <a href="/admin/users/<%= user.ID %>" class="link link-hover text-primary font-medium block">
+                <%= user.DisplayName() %>
+              </a>
+              <%= if (user.DisplayName() != user.Email) { %>
+                <span class="block text-xs opacity-60 font-mono mt-0.5">✉️ <%= user.Email %></span>
+              <% } %>
+              <%= if (user.PhoneNumber.Valid && user.PhoneNumber.String != "") { %>
+                <span class="block text-xs text-base-content/70 mt-0.5">📞 <%= user.PhoneNumber.String %></span>
+              <% } %>
+            </td>
+            <td>
+              <div class="flex gap-1 flex-wrap">
+                <%= for (role) in user.Roles { %>
+                  <%= if (role.ID=="ADMIN" || role.ID=="SUPER_ADMIN" ) { %>
+                    <span class="badge badge-primary">
+                      <%= role.RoleName %>
+                    </span>
+                    <% } else { %>
+                      <span class="badge badge-ghost">
+                        <%= role.RoleName %>
+                      </span>
+                      <% } %>
+                        <% } %>
+              </div>
+            </td>
+            <td>
+              <%= user.CreatedAt.Format("Jan 02, 2006") %>
+            </td>
+            <td>
+              <div class="flex gap-2">
+                <a href="/admin/users/<%= user.ID %>/edit" class="btn btn-sm btn-outline">Edit</a>
+                <form action="/admin/users/<%= user.ID %>" method="POST" class="inline">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input type="hidden" name="authenticity_token" value="<%= authenticity_token %>">
+                  <button type="submit" class="btn btn-sm btn-error btn-outline" data-confirm="Remove user from organization?" onclick="return confirm('Remove user from organization?');">Remove</button>
+                </form>
+                <%= if (is_current_super_admin) { %>
+                  <form action="/admin/users/<%= user.ID %>/password_reset" method="POST" class="inline">
+                    <input type="hidden" name="authenticity_token" value="<%= authenticity_token %>">
+                    <button type="submit" class="btn btn-sm btn-warning btn-outline"
+                      data-confirm="Reset user password?" onclick="return confirm('Reset user password?');">Reset Password</button>
+                  </form>
+                <% } %>
+              </div>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>

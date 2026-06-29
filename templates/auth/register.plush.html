@@ -1,0 +1,38 @@
+<div class="flex justify-center items-center min-h-[70vh]">
+  <div class="card w-full max-w-md bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-2xl font-bold mb-4">Create Account</h2>
+
+      <%= form_for(user, {action: registerPath(), id: "user-form"}) { %>
+        <div class="form-control w-full">
+          <label class="label">
+            <span class="label-text">Email</span>
+          </label>
+          <%= f.InputTag("Email", {class: "input input-bordered w-full", type: "email", required: true}) %>
+        </div>
+
+        <div class="form-control w-full mt-4">
+          <label class="label">
+            <span class="label-text">Password</span>
+          </label>
+          <%= f.InputTag("Password", {class: "input input-bordered w-full", type: "password", required: true}) %>
+        </div>
+
+        <div class="form-control w-full mt-4">
+          <label class="label">
+            <span class="label-text">Confirm Password</span>
+          </label>
+          <%= f.InputTag("PasswordConfirmation", {class: "input input-bordered w-full", type: "password", required: true}) %>
+        </div>
+
+        <div class="form-control mt-6">
+          <button class="btn btn-primary w-full">Sign Up</button>
+        </div>
+      <% } %>
+
+      <div class="text-center mt-4 text-sm">
+        Already have an account? <a href="/login" class="link link-primary">Log in</a>
+      </div>
+    </div>
+  </div>
+</div>

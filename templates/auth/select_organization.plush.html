@@ -1,0 +1,26 @@
+<div class="max-w-md mx-auto">
+    <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title text-2xl font-bold text-center block">Select Organization</h2>
+            <p class="text-center text-base-content/70 mb-4">Please select the organization you want to access.</p>
+
+            <form action="<%= authSelectOrganizationPath() %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%= authenticity_token %>">
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-medium">Organization</span>
+                    </label>
+                    <select name="organization_id" class="select select-bordered w-full">
+                        <%= for (org) in organizations { %>
+                            <option value="<%= org.ID %>"><%= org.Name %></option>
+                        <% } %>
+                    </select>
+                </div>
+
+                <div class="card-actions justify-end mt-6">
+                    <button type="submit" class="btn btn-primary w-full">Continue</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

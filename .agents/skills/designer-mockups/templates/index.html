@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockups Index - TodoFlow Prototyping</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- daisyUI v5 via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <!-- Theme Manager -->
+    <script src="theme.js"></script>
+</head>
+<body class="font-['Inter',sans-serif] bg-base-100 text-base-content min-h-screen flex flex-col justify-between">
+
+    <!-- Sticky Navbar -->
+    <nav class="navbar bg-base-200/80 backdrop-blur-sm sticky top-0 z-50 border-b border-base-300">
+        <div class="container mx-auto px-4 flex items-center justify-between w-full">
+            <span class="btn btn-ghost text-xl font-bold text-primary">
+                ✓ TodoFlow Mockups Hub
+            </span>
+            
+            <div class="flex items-center gap-2">
+                <!-- Theme Selector -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-sm normal-case">
+                        Theme: <span id="current-theme">dark</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-50 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-48 mt-4 border border-base-300">
+                        <li><a onclick="setTheme('light')">☀️ Light</a></li>
+                        <li><a onclick="setTheme('dark')">🌙 Dark</a></li>
+                        <li><a onclick="setTheme('cupcake')">🧁 Cupcake</a></li>
+                        <li><a onclick="setTheme('bumblebee')">🐝 Bumblebee</a></li>
+                        <li><a onclick="setTheme('emerald')">🌿 Emerald</a></li>
+                        <li><a onclick="setTheme('corporate')">🏢 Corporate</a></li>
+                        <li><a onclick="setTheme('synthwave')">🌊 Synthwave</a></li>
+                        <li><a onclick="setTheme('retro')">📼 Retro</a></li>
+                        <li><a onclick="setTheme('cyberpunk')">🤖 Cyberpunk</a></li>
+                        <li><a onclick="setTheme('valentine')">💝 Valentine</a></li>
+                        <li><a onclick="setTheme('halloween')">🎃 Halloween</a></li>
+                        <li><a onclick="setTheme('garden')">🌸 Garden</a></li>
+                        <li><a onclick="setTheme('forest')">🌲 Forest</a></li>
+                        <li><a onclick="setTheme('aqua')">💙 Aqua</a></li>
+                        <li><a onclick="setTheme('lofi')">🎵 Lofi</a></li>
+                        <li><a onclick="setTheme('pastel')">🎨 Pastel</a></li>
+                        <li><a onclick="setTheme('fantasy')">🏰 Fantasy</a></li>
+                        <li><a onclick="setTheme('wireframe')">📐 Wireframe</a></li>
+                        <li><a onclick="setTheme('business')">💼 Business</a></li>
+                        <li><a onclick="setTheme('acid')">💜 Acid</a></li>
+                        <li><a onclick="setTheme('lemonade')">🍋 Lemonade</a></li>
+                        <li><a onclick="setTheme('night')">🌃 Night</a></li>
+                        <li><a onclick="setTheme('coffee')">☕ Coffee</a></li>
+                        <li><a onclick="setTheme('winter')">❄️ Winter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Hero banner -->
+    <div class="hero bg-base-200 py-8 border-b border-base-300 mb-6">
+        <div class="hero-content text-center">
+            <div class="max-w-xl">
+                <h1 class="text-4xl font-bold">Interactive Mockups Index</h1>
+                <p class="py-4 opacity-70">Review the UI/UX designs before we implement them in production. Switch themes to see different palettes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content List area -->
+    <main class="container mx-auto px-4 py-4 flex-grow max-w-4xl">
+        <div class="card bg-base-200 border border-base-300 shadow-xl">
+            <div class="card-body p-6">
+                <h2 class="card-title text-2xl font-bold border-b border-base-300 pb-3 mb-4">Generated Mockup Pages</h2>
+                
+                <div class="overflow-x-auto">
+                    <table class="table w-full">
+                        <thead>
+                            <tr>
+                                <th>Page / View</th>
+                                <th>Description / Function</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Mockup Template Entry Points -->
+                            <tr>
+                                <td>
+                                    <div class="font-bold">Authenticated Base Shell</div>
+                                    <div class="text-xs opacity-50">base.html</div>
+                                </td>
+                                <td>Boilerplate template representing the logged-in user layout (includes organization switcher and user dropdown).</td>
+                                <td class="text-right">
+                                    <a href="base.html" class="btn btn-primary btn-sm">View Template</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="font-bold">Logged-Out Base Shell</div>
+                                    <div class="text-xs opacity-50">base-loggedout.html</div>
+                                </td>
+                                <td>Boilerplate template representing guest pages (includes "Log in" and "Get Started" buttons).</td>
+                                <td class="text-right">
+                                    <a href="base-loggedout.html" class="btn btn-primary btn-sm">View Template</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="font-bold">Log In Page</div>
+                                    <div class="text-xs opacity-50">login.html</div>
+                                </td>
+                                <td>Authentication form mockup for user logins, matching field structures of login.plush.html.</td>
+                                <td class="text-right">
+                                    <a href="login.html" class="btn btn-primary btn-sm">View Page</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="font-bold">Registration Page</div>
+                                    <div class="text-xs opacity-50">register.html</div>
+                                </td>
+                                <td>Account creation form mockup, matching input structures of register.plush.html.</td>
+                                <td class="text-right">
+                                    <a href="register.html" class="btn btn-primary btn-sm">View Page</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="font-bold">DaisyUI Kitchen Sink</div>
+                                    <div class="text-xs opacity-50">kitchen-sink.html</div>
+                                </td>
+                                <td>Reference catalog exhibiting styled DaisyUI form components, tables, buttons, cards, and modal layouts.</td>
+                                <td class="text-right">
+                                    <a href="kitchen-sink.html" class="btn btn-primary btn-sm">View Reference</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-4 bg-base-200 text-base-content/50 mt-12 border-t border-base-300">
+        <p class="text-sm">Powered by <a href="http://gobuffalo.io/" class="link link-hover text-primary">Buffalo</a> · Built with ♥</p>
+    </footer>
+
+</body>
+</html>

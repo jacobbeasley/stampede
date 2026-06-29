@@ -1,0 +1,66 @@
+<div class="max-w-2xl mx-auto space-y-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold">Profile Management</h1>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl border border-base-200">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Update Details</h2>
+
+      <%= form_for(user, {action: profileUpdatePath(), method: "POST"}) { %>
+        <%= partial("flash.html") %>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">First Name</span></label>
+          <%= f.InputTag("FirstName", {class: "input input-bordered w-full", placeholder: "First Name", value: user.FirstName.String}) %>
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Last Name</span></label>
+          <%= f.InputTag("LastName", {class: "input input-bordered w-full", placeholder: "Last Name", value: user.LastName.String}) %>
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Phone Number</span></label>
+          <%= f.InputTag("PhoneNumber", {class: "input input-bordered w-full", placeholder: "Phone Number", type: "tel", value: user.PhoneNumber.String}) %>
+        </div>
+
+        <div class="form-control w-full mb-6">
+          <label class="label"><span class="label-text">Email Address</span></label>
+          <%= f.InputTag("Email", {class: "input input-bordered w-full", type: "email", required: true}) %>
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <button class="btn btn-primary w-full sm:w-auto">Update Profile</button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl border border-base-200">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4">Change Password</h2>
+
+      <%= form_for(user, {action: profilePasswordUpdatePath(), method: "POST"}) { %>
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">Current Password</span></label>
+          <input type="password" name="current_password" class="input input-bordered w-full" required />
+        </div>
+
+        <div class="form-control w-full mb-4">
+          <label class="label"><span class="label-text">New Password</span></label>
+          <input type="password" name="Password" class="input input-bordered w-full" required />
+        </div>
+
+        <div class="form-control w-full mb-6">
+          <label class="label"><span class="label-text">Confirm New Password</span></label>
+          <input type="password" name="PasswordConfirmation" class="input input-bordered w-full" required />
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <button class="btn btn-secondary w-full sm:w-auto">Change Password</button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>

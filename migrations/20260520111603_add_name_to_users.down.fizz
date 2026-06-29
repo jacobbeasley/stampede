@@ -1,0 +1,2 @@
+drop_column("users", "first_name")
+drop_column("users", "last_name")

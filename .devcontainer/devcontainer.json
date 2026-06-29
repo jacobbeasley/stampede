@@ -1,0 +1,36 @@
+{
+  "name": "Buffalo Full Stack",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "18"
+    },
+    "ghcr.io/devcontainers-contrib/features/postgresql-client:1": {},
+    "ghcr.io/devcontainers-contrib/features/buffalo:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "go.toolsManagement.checkForUpdates": "local",
+        "go.useLanguageServer": true,
+        "go.gopath": "/go",
+        "editor.formatOnSave": true,
+        "[go]": {
+          "editor.formatOnSave": true
+        }
+      },
+      "extensions": [
+        "golang.Go",
+        "svelte.svelte-vscode",
+        "bradlc.vscode-tailwindcss",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  },
+  "forwardPorts": [3000, 3001, 5432],
+  "postCreateCommand": "go install github.com/gobuffalo/cli/cmd/buffalo@latest && make setup",
+  "remoteUser": "vscode",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace"
+}

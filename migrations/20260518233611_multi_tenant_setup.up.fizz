@@ -1,0 +1,21 @@
+create_table("organizations") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("name", "string", {})
+	t.Timestamps()
+}
+
+add_column("user_roles", "organization_id", "uuid", {"null": true})
+add_foreign_key("user_roles", "organization_id", {"organizations": ["id"]}, {"on_delete": "cascade"})
+
+add_column("todoes", "organization_id", "uuid", {"null": true})
+add_foreign_key("todoes", "organization_id", {"organizations": ["id"]}, {"on_delete": "cascade"})
+
+sql("INSERT INTO roles (id, role_name, created_at, updated_at) VALUES ('SUPER_ADMIN', 'Super Administrator', NOW(), NOW());")
+
+sql("INSERT INTO organizations (id, name, created_at, updated_at) VALUES ('00000000-0000-0000-0000-000000000001', 'Default Organization', NOW(), NOW());")
+
+sql("UPDATE user_roles SET organization_id = '00000000-0000-0000-0000-000000000001' WHERE organization_id IS NULL;")
+sql("UPDATE todoes SET organization_id = '00000000-0000-0000-0000-000000000001' WHERE organization_id IS NULL;")
+
+sql("INSERT INTO users (id, email, password_hash, created_at, updated_at) VALUES ('00000000-0000-0000-0000-000000000002', 'admin@example.com', '$2a$10$UP4ds3Sh74626Fzs8DcNMeuGZWCRFAa/GfpC30lm3hXOps0KPLT/q', NOW(), NOW()) ON CONFLICT (email) DO NOTHING;")
+sql("INSERT INTO user_roles (id, user_id, role_id, organization_id, created_at, updated_at) VALUES (gen_random_uuid(), '00000000-0000-0000-0000-000000000002', 'SUPER_ADMIN', '00000000-0000-0000-0000-000000000001', NOW(), NOW());")

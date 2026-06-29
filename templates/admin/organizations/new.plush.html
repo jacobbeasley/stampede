@@ -1,0 +1,23 @@
+<div class="max-w-2xl mx-auto">
+    <div class="mb-6 flex items-center gap-2">
+        <a href="<%= adminSuperOrganizationsPath() %>" class="btn btn-ghost btn-sm">← Back</a>
+        <h1 class="text-3xl font-bold">New Organization</h1>
+    </div>
+
+    <div class="card bg-base-200 shadow-xl">
+        <div class="card-body">
+            <%= form_for(organization, {action: adminSuperOrganizationsPath(), method: "POST"}) { %>
+                <div class="form-control w-full">
+                    <label class="label">
+                        <span class="label-text font-medium">Organization Name</span>
+                    </label>
+                    <%= f.InputTag("Name", {class: "input input-bordered w-full"}) %>
+                </div>
+
+                <div class="card-actions justify-end mt-6">
+                    <button type="submit" class="btn btn-primary">Create Organization</button>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

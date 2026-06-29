@@ -1,0 +1,66 @@
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+  <div class="flex items-center gap-4 mb-6">
+    <a href="/admin/users" class="btn btn-ghost btn-sm">← Back</a>
+    <h1 class="text-3xl font-bold">Create User</h1>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <%= formFor(user, {action: "/admin/users", method: "POST"}) { %>
+        <div class="form-control w-full">
+          <label class="label" for="user-Email">
+            <span class="label-text">Email</span>
+          </label>
+          <input name="Email" value="<%= user.Email %>" class="input input-bordered w-full" type="email" required />
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div class="form-control w-full">
+            <label class="label" for="user-FirstName">
+              <span class="label-text">First Name</span>
+            </label>
+            <input name="FirstName" value="<%= user.FirstName.String %>" class="input input-bordered w-full" type="text" placeholder="First Name" />
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label" for="user-LastName">
+              <span class="label-text">Last Name</span>
+            </label>
+            <input name="LastName" value="<%= user.LastName.String %>" class="input input-bordered w-full" type="text" placeholder="Last Name" />
+          </div>
+        </div>
+
+        <div class="form-control w-full mt-4">
+          <label class="label" for="user-Password">
+            <span class="label-text">Password</span>
+          </label>
+          <input name="Password" class="input input-bordered w-full" type="password" />
+        </div>
+
+        <div class="form-control w-full mt-4">
+          <label class="label" for="user-PasswordConfirmation">
+            <span class="label-text">Confirm Password</span>
+          </label>
+          <input name="PasswordConfirmation" class="input input-bordered w-full" type="password" />
+        </div>
+
+        <div class="form-control w-full mt-4">
+          <label class="label">
+            <span class="label-text font-medium">Roles</span>
+          </label>
+          <div class="flex flex-col gap-2">
+            <%= for (role) in roles { %>
+              <label class="label cursor-pointer justify-start gap-4">
+                <input type="checkbox" name="RoleIDs" value="<%= role.ID %>" class="checkbox checkbox-primary" />
+                <span class="label-text"><%= role.RoleName %></span>
+              </label>
+            <% } %>
+          </div>
+        </div>
+        <div class="form-control mt-6">
+          <button class="btn btn-primary w-full">Create User</button>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</div>

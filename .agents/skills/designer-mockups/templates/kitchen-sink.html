@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Sink - DaisyUI Components</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- daisyUI v5 via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+    <!-- Theme Manager -->
+    <script src="theme.js"></script>
+    <style>
+        .component-section {
+            scroll-margin-top: 8rem;
+        }
+    </style>
+</head>
+<body class="font-['Inter',sans-serif] bg-base-100 text-base-content min-h-screen">
+
+    <!-- Sticky Navbar Aligned with Starter App -->
+    <nav class="navbar bg-base-200/80 backdrop-blur-sm sticky top-0 z-50 border-b border-base-300">
+        <div class="container mx-auto px-4 flex items-center justify-between w-full">
+            <div class="flex-1">
+                <a class="btn btn-ghost text-xl font-bold text-primary">✓ TodoFlow Kitchen Sink</a>
+            </div>
+            <div class="flex-none gap-2">
+                <!-- Theme Selector -->
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-sm normal-case">
+                        Theme: <span id="current-theme">dark</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-250 rounded-box w-48 mb-2 border border-base-300">
+                        <li><a onclick="setTheme('light')">☀️ Light</a></li>
+                        <li><a onclick="setTheme('dark')">🌙 Dark</a></li>
+                        <li><a onclick="setTheme('cupcake')">🧁 Cupcake</a></li>
+                        <li><a onclick="setTheme('bumblebee')">🐝 Bumblebee</a></li>
+                        <li><a onclick="setTheme('emerald')">🌿 Emerald</a></li>
+                        <li><a onclick="setTheme('corporate')">🏢 Corporate</a></li>
+                        <li><a onclick="setTheme('synthwave')">🌊 Synthwave</a></li>
+                        <li><a onclick="setTheme('retro')">📼 Retro</a></li>
+                        <li><a onclick="setTheme('cyberpunk')">🤖 Cyberpunk</a></li>
+                        <li><a onclick="setTheme('valentine')">💝 Valentine</a></li>
+                        <li><a onclick="setTheme('halloween')">🎃 Halloween</a></li>
+                        <li><a onclick="setTheme('garden')">🌸 Garden</a></li>
+                        <li><a onclick="setTheme('forest')">🌲 Forest</a></li>
+                        <li><a onclick="setTheme('aqua')">💙 Aqua</a></li>
+                        <li><a onclick="setTheme('lofi')">🎵 Lofi</a></li>
+                        <li><a onclick="setTheme('pastel')">🎨 Pastel</a></li>
+                        <li><a onclick="setTheme('fantasy')">🏰 Fantasy</a></li>
+                        <li><a onclick="setTheme('wireframe')">📐 Wireframe</a></li>
+                        <li><a onclick="setTheme('business')">💼 Business</a></li>
+                        <li><a onclick="setTheme('acid')">💜 Acid</a></li>
+                        <li><a onclick="setTheme('lemonade')">🍋 Lemonade</a></li>
+                        <li><a onclick="setTheme('night')">🌃 Night</a></li>
+                        <li><a onclick="setTheme('coffee')">☕ Coffee</a></li>
+                        <li><a onclick="setTheme('winter')">❄️ Winter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Title -->
+    <div class="hero bg-base-250 py-12 border-b border-base-300">
+        <div class="hero-content text-center">
+            <div>
+                <h1 class="text-5xl font-bold">DaisyUI Components</h1>
+                <p class="py-4 text-lg opacity-70">A reference sheet for interactive low-fidelity layouts aligned with TodoFlow guidelines.</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 space-y-12">
+        <!-- Alerts -->
+        <section id="alerts" class="component-section">
+            <h2 class="text-3xl font-bold mb-6">Alerts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="alert alert-primary">
+                    <span>Primary alert - Important information</span>
+                </div>
+                <div class="alert alert-secondary">
+                    <span>Secondary alert - Additional info</span>
+                </div>
+                <div class="alert alert-accent">
+                    <span>Accent alert - Special attention</span>
+                </div>
+                <div class="alert alert-info">
+                    <span>Info alert - General information</span>
+                </div>
+                <div class="alert alert-warning">
+                    <span>Warning alert - Be careful</span>
+                </div>
+                <div class="alert alert-error">
+                    <span>Error alert - Something went wrong</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Badges -->
+        <section id="badges" class="component-section">
+            <h2 class="text-3xl font-bold mb-6">Badges</h2>
+            <div class="flex flex-wrap gap-4">
+                <span class="badge badge-primary">Primary</span>
+                <span class="badge badge-secondary">Secondary</span>
+                <span class="badge badge-accent">Accent</span>
+                <span class="badge badge-info">Info</span>
+                <span class="badge badge-warning">Warning</span>
+                <span class="badge badge-error">Error</span>
+                <span class="badge badge-ghost">Ghost</span>
+                <span class="badge badge-outline">Outline</span>
+            </div>
+        </section>
+
+        <!-- Buttons -->
+        <section id="buttons" class="component-section">
+            <h2 class="text-3xl font-bold mb-6">Buttons</h2>
+            <div class="flex flex-wrap gap-4 mb-4">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-accent">Accent</button>
+                <button class="btn btn-info">Info</button>
+                <button class="btn btn-warning">Warning</button>
+                <button class="btn btn-error">Error</button>
+            </div>
+        </section>
+
+        <!-- Cards -->
+        <section id="cards" class="component-section">
+            <h2 class="text-3xl font-bold mb-6">Cards</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card bg-base-200 shadow-md border border-base-300">
+                    <div class="card-body">
+                        <h3 class="card-title">Simple Card</h3>
+                        <p>Card content goes here</p>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-primary">Action</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Form Controls -->
+        <section id="forms" class="component-section">
+            <h2 class="text-3xl font-bold mb-6">Form Controls</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card bg-base-200 shadow-md border border-base-300">
+                    <div class="card-body">
+                        <h3 class="card-title mb-4">Inputs</h3>
+                        <div class="form-control">
+                            <label class="label"><span class="label-text">Text Input</span></label>
+                            <input type="text" placeholder="Type here" class="input input-bordered w-full" />
+                        </div>
+                        <div class="form-control mt-4">
+                            <label class="label"><span class="label-text">Textarea</span></label>
+                            <textarea class="textarea textarea-bordered h-24" placeholder="Enter description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer footer-center p-4 bg-base-200 text-base-content/50 mt-16 border-t border-base-300">
+        <p class="text-sm">Powered by <a href="http://gobuffalo.io/" class="link link-hover text-primary">Buffalo</a> · Built with ♥</p>
+    </footer>
+</body>
+</html>

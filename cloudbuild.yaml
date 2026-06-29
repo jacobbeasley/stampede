@@ -1,0 +1,70 @@
+steps: 
+  # 1. Build the container image using Docker or Buildpacks
+  # This builds it ONCE and tags it into your Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build', 
+      '-t', '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$_SERVICE_NAME:$_IMAGE_TAG', 
+      '.'
+    ]
+
+  # 2. Push the compiled image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push', 
+      '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$_SERVICE_NAME:$_IMAGE_TAG'
+    ]
+
+  # 3. Run database migrations using the PRE-BUILT container image
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'jobs'
+      - 'deploy'
+      - '$_SERVICE_NAME-migrate'
+      - '--image'
+      - '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$_SERVICE_NAME:$_IMAGE_TAG'
+      - '--region'
+      - '$_DEPLOY_REGION'
+      - '--command'
+      - '/bin/app'
+      - '--args'
+      - 'migrate'
+      - '--set-env-vars'
+      - 'GO_ENV=$_GO_ENV'
+      - '--set-secrets'
+      - 'SESSION_SECRET=$_SESSION_SECRET_NAME:latest,DATABASE_URL=$_DATABASE_URL_SECRET_NAME:latest'
+      - '--execute-now'
+      - '--wait'
+
+  # 4. Deploy to Cloud Run Service using the SAME pre-built container image
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - '$_SERVICE_NAME'
+      - '--image'
+      - '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$_SERVICE_NAME:$_IMAGE_TAG'
+      - '--region'
+      - '$_DEPLOY_REGION'
+      - '--allow-unauthenticated'
+      - '--set-env-vars'
+      - 'GO_ENV=$_GO_ENV'
+      - '--set-secrets'
+      - 'SESSION_SECRET=$_SESSION_SECRET_NAME:latest,DATABASE_URL=$_DATABASE_URL_SECRET_NAME:latest'
+
+# This tells Cloud Build to track this image as an official build artifact
+images:
+  - '$_AR_HOSTNAME/$_AR_PROJECT_ID/$_AR_REPOSITORY/$_SERVICE_NAME:$_IMAGE_TAG'
+
+substitutions:
+  # could also be $COMMIT_SHA
+  _IMAGE_TAG: 'latest'
+  _DEPLOY_REGION: 'us-east4'
+  _SERVICE_NAME: 'buffalo-app'
+  _GO_ENV: 'production'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -1,0 +1,36 @@
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Organizations</h1>
+    <a href="<%= newAdminSuperOrganizationsPath() %>" class="btn btn-primary">Create New Organization</a>
+</div>
+
+<div class="card bg-base-200 shadow-xl overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Created At</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for (org) in organizations { %>
+                    <tr>
+                        <td class="font-medium">
+                            <a href="<%= adminSuperOrganizationPath({organization_id: org.ID}) %>" class="link link-hover text-primary"><%= org.Name %></a>
+                        </td>
+                        <td><%= org.CreatedAt.Format("2006-01-02") %></td>
+                        <td class="text-right flex justify-end gap-2">
+                            <a href="<%= adminSuperOrganizationPath({organization_id: org.ID}) %>" class="btn btn-ghost btn-xs">View</a>
+                            <a href="<%= editAdminSuperOrganizationPath({organization_id: org.ID}) %>" class="btn btn-ghost btn-xs">Edit</a>
+                        </td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-4">
+    <%= partial("pagination.html") %>
+</div>

@@ -1,0 +1,5 @@
+create_table("roles") {
+	t.Column("id", "string", {primary: true})
+	t.Column("role_name", "string", {})
+	t.Timestamps()
+}

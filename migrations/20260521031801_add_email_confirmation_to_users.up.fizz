@@ -1,0 +1,3 @@
+add_column("users", "pending_email", "string", {"null": true})
+add_column("users", "email_confirmation_token", "string", {"null": true})
+add_column("users", "email_confirmation_expires_at", "timestamp", {"null": true})

@@ -1,0 +1,10 @@
+create_table("todoes") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("user_id", "uuid", {})
+	t.Column("title", "string", {})
+	t.Column("description", "text", {})
+	t.Column("is_completed", "bool", {})
+	t.Column("position", "integer", {})
+	t.Timestamps()
+	t.ForeignKey("user_id", {"users": ["id"]}, {"on_delete": "cascade"})
+}

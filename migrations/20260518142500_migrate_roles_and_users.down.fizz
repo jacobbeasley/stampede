@@ -1,0 +1,6 @@
+add_column("users", "is_admin", "bool", {"default": false})
+
+sql("UPDATE users SET is_admin = true WHERE id IN (SELECT user_id FROM user_roles WHERE role_id = 'ADMIN');")
+
+sql("DELETE FROM user_roles;")
+sql("DELETE FROM roles WHERE id IN ('USER', 'ADMIN');")

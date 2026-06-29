@@ -1,0 +1,3 @@
+drop_column("users", "pending_email")
+drop_column("users", "email_confirmation_token")
+drop_column("users", "email_confirmation_expires_at")

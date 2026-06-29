@@ -1,0 +1,8 @@
+create_table("user_roles") {
+	t.Column("id", "uuid", {primary: true})
+	t.Column("user_id", "uuid", {})
+	t.Column("role_id", "string", {})
+	t.Timestamps()
+	t.ForeignKey("user_id", {"users": ["id"]}, {"on_delete": "cascade"})
+	t.ForeignKey("role_id", {"roles": ["id"]}, {"on_delete": "cascade"})
+}

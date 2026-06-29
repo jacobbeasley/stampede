@@ -1,0 +1,3 @@
+add_index("users", "reset_token", {})
+add_index("user_roles", ["user_id", "organization_id"], {})
+add_index("todoes", ["user_id", "organization_id"], {})

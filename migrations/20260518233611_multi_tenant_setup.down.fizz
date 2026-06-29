@@ -1,0 +1,4 @@
+drop_table("organizations")
+remove_column("user_roles", "organization_id")
+remove_column("todoes", "organization_id")
+sql("DELETE FROM roles WHERE id = 'SUPER_ADMIN';")

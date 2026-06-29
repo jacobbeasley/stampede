@@ -1,0 +1,11 @@
+{
+  "skill_name": "implement-user-story",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "We need a new user story implemented: 'As an admin, I want to manage system settings (key-value pairs) so that I can configure application behavior dynamically.' Please implement this.",
+      "expected_output": "The agent should gather context, create an implementation plan (task.md, plan.md), propose scaffolding commands (e.g. `buffalo pop.g model Setting key:string value:string`), wait for approval, and then execute the plan to build the backend and Svelte frontend components, followed by testing and documentation.",
+      "files": []
+    }
+  ]
+}

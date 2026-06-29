@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta name="description" content="A modern To-Do Manager built with Buffalo, Svelte, Tailwind CSS, and DaisyUI.">
+  <title>To-Do Manager</title>
+
+  <!-- Google Fonts - Optional - Improves consistency on all operating systems and browsers 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+-->
+
+  <meta name="csrf-param" content="authenticity_token" />
+  <meta name="csrf-token" content="<%= authenticity_token %>" />
+
+  <!-- Vite assets: use manifest-hashed paths in production, dev server in development -->
+  <%= if (GO_ENV=="production" ) { %>
+    <link rel="stylesheet" href='<%= viteCSS("assets/js/main.js") %>'>
+    <% } else { %>
+      <script type="module" src="http://localhost:3001/@vite/client"></script>
+      <% } %>
+</head>
+
+<body class="font-['Inter',sans-serif] bg-base-100 text-base-content min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="navbar bg-base-200/80 backdrop-blur-sm sticky top-0 z-50 border-b border-base-300">
+    <div class="container mx-auto px-4 flex items-center justify-between w-full">
+      <a href="<%= rootPath() %>" class="btn btn-ghost text-xl font-bold text-primary">
+        ✓ TodoFlow
+      </a>
+      <div class="flex items-center gap-4">
+        <%= if (current_user) { %>
+          <% let is_admin=false %>
+            <% let is_super_admin=false %>
+              <%= if (current_user.Roles) { %>
+                <%= for (r) in current_user.Roles { %>
+                  <%= if (r.ID=="ADMIN" || r.ID=="SUPER_ADMIN" ) { %>
+                    <% is_admin=true %>
+                      <% } %>
+                        <%= if (r.ID=="SUPER_ADMIN" ) { %>
+                          <% is_super_admin=true %>
+                            <% } %>
+                              <% } %>
+                                <% } %>
+                                  <%= if (current_organization && ((user_organizations && len(user_organizations)>1) ||
+                                    is_admin)) { %>
+                                    <div class="dropdown dropdown-end">
+                                      <label tabindex="0" class="btn btn-ghost btn-sm normal-case gap-1">
+                                        🏢 <%= current_organization.Name %>
+                                          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 opacity-50" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M19 9l-7 7-7-7" />
+                                          </svg>
+                                      </label>
+                                      <ul tabindex="0"
+                                        class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-4 border border-base-300">
+                                        <%= if (user_organizations && len(user_organizations)> 1) { %>
+                                          <li><a onclick="org_modal.showModal()">Switch Organization</a></li>
+                                          <%= if (is_admin) { %>
+                                            <div class="divider my-0"></div>
+                                            <% } %>
+                                              <% } %>
+
+
+                                                <%= if (is_admin) { %>
+                                                  <li><a href="/admin/users">User Management</a></li>
+                                                  <% } %>
+                                                    <%= if (is_super_admin) { %>
+                                                      <li><a href="/admin/super/organizations">Manage Organizations</a>
+                                                      </li>
+                                                      <% } %>
+                                      </ul>
+                                    </div>
+                                    <% } %>
+
+                                      <div class="dropdown dropdown-end">
+                                        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                                          <div
+                                            class="w-8 rounded-full bg-neutral text-neutral-content flex items-center justify-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                              fill="currentColor">
+                                              <path fill-rule="evenodd"
+                                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                                clip-rule="evenodd" />
+                                            </svg>
+                                          </div>
+                                        </label>
+                                        <ul tabindex="0"
+                                          class="dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-52 mt-4 border border-base-300">
+                                          <li
+                                            class="menu-title px-4 py-2 opacity-50 text-xs text-ellipsis overflow-hidden whitespace-nowrap">
+                                            <%= current_user.DisplayName() %>
+                                          </li>
+                                          <div class="divider my-0"></div>
+                                          <li><a href="/profile">Profile</a></li>
+                                          <li><a href="/logout">Log out</a></li>
+                                        </ul>
+                                      </div>
+                                      <% } else { %>
+                                        <a href="/login" class="btn btn-ghost btn-sm">Log in</a>
+                                        <a href="/register" class="btn btn-primary btn-sm">Get Started</a>
+                                        <% } %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Flash messages -->
+  <div class="container mx-auto px-4 mt-4">
+    <%= partial("flash.html") %>
+  </div>
+
+  <!-- Page content -->
+  <main class="container mx-auto px-4 py-8">
+    <%= yield %>
+  </main>
+
+  <!-- Organization Switcher Modal -->
+  <%= if (current_user) { %>
+    <dialog id="org_modal" class="modal">
+      <div class="modal-box bg-base-200">
+        <h3 class="font-bold text-lg mb-4">Switch Organization</h3>
+        <p class="py-2 opacity-70">Select the organization you'd like to switch to:</p>
+
+        <div class="space-y-2 mt-4">
+          <%= if (user_organizations) { %>
+            <%= for (org) in user_organizations { %>
+              <%= form_for(authSelectOrganizationPath(), {method: "POST" , class: "w-full" }) { %>
+                <input type="hidden" name="organization_id" value="<%= org.ID %>">
+                <button type="submit"
+                  class="btn btn-ghost w-full justify-start gap-2 <%= if (current_organization && current_organization.ID == org.ID) { %>btn-active<% } %>">
+                  🏢 <%= org.Name %>
+                    <%= if (current_organization && current_organization.ID==org.ID) { %>
+                      <span class="badge badge-primary badge-sm ml-auto">Active</span>
+                      <% } %>
+                </button>
+                <% } %>
+                  <% } %>
+                    <% } %>
+        </div>
+
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn">Close</button>
+          </form>
+        </div>
+      </div>
+      <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+      </form>
+    </dialog>
+    <% } %>
+
+      <!-- Footer -->
+      <footer class="footer footer-center p-4 bg-base-200 text-base-content/50 mt-16 border-t border-base-300">
+        <p class="text-sm">Powered by <a href="http://gobuffalo.io/" class="link link-hover text-primary">Buffalo</a> ·
+          Built with ♥</p>
+      </footer>
+
+      <!-- Vite JS entry -->
+      <%= if (GO_ENV=="production" ) { %>
+        <script type="module" src='<%= viteAsset("assets/js/main.js") %>'></script>
+        <% } else { %>
+          <script type="module" src="http://localhost:3001/assets/js/main.js"></script>
+          <% } %>
+</body>
+
+</html>

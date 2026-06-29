@@ -1,0 +1,78 @@
+<!-- Hero Section -->
+<section class="hero min-h-[75vh] flex flex-col items-center justify-center text-center py-20">
+  <div class="max-w-3xl mx-auto space-y-6 px-4">
+
+    <!-- Eyebrow badge -->
+    <div class="flex justify-center">
+      <span class="badge badge-primary badge-outline text-sm px-4 py-3 font-semibold tracking-wide uppercase">
+        🚀 Your productivity, reimagined
+      </span>
+    </div>
+
+    <!-- Headline -->
+    <h1 class="text-6xl md:text-7xl font-extrabold leading-tight">
+      <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+        Stay focused.<br>Get things done.
+      </span>
+    </h1>
+
+    <!-- Subheading -->
+    <p class="text-xl text-base-content/60 max-w-xl mx-auto leading-relaxed">
+      TodoFlow is a beautifully simple task manager. Organize your day, track your progress, and never miss a beat.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="flex flex-wrap gap-4 justify-center pt-4">
+      <%= if (current_user) { %>
+        <a href="/todos" class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-shadow">
+          Manage Todo List
+        </a>
+      <% } else { %>
+        <a href="/register" class="btn btn-primary btn-lg gap-2 shadow-lg shadow-primary/30 hover:shadow-primary/50 transition-shadow">
+          ✨ Get Started Free
+        </a>
+        <a href="/login" class="btn btn-outline btn-lg">
+          Log in
+        </a>
+      <% } %>
+    </div>
+
+  </div>
+</section>
+
+<!-- Svelte Mount Point — HelloWorld demo -->
+<section class="max-w-2xl mx-auto px-4 pb-20">
+  <div class="divider text-base-content/30 text-sm mb-8">Stack Demo</div>
+  <div id="app"></div>
+</section>
+
+<!-- Feature Cards -->
+<section class="pb-24 px-4">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <div class="card bg-base-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div class="card-body items-center text-center gap-3">
+        <span class="text-4xl">📋</span>
+        <h2 class="card-title">Organize Effortlessly</h2>
+        <p class="text-base-content/60 text-sm">Create, edit, and reorder tasks with a smooth drag-and-drop interface.</p>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div class="card-body items-center text-center gap-3">
+        <span class="text-4xl">🔒</span>
+        <h2 class="card-title">Secure & Private</h2>
+        <p class="text-base-content/60 text-sm">Your data is yours. Secure session-based auth keeps everything private.</p>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+      <div class="card-body items-center text-center gap-3">
+        <span class="text-4xl">⚡</span>
+        <h2 class="card-title">Lightning Fast</h2>
+        <p class="text-base-content/60 text-sm">Built on Buffalo + Svelte for a blazingly fast full-stack experience.</p>
+      </div>
+    </div>
+
+  </div>
+</section>

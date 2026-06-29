@@ -1,0 +1,1 @@
+add_column("users", "phone_number", "string", {"null": true})

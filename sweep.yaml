@@ -1,0 +1,34 @@
+# Sweep/Jules Agent Configuration
+# This file tells autonomous agents how to safely interact with this repository.
+
+description: |
+  This is a full-stack Go application using the Buffalo web framework (gobuffalo.io) and a Svelte 5 frontend (via Vite).
+  The database is PostgreSQL managed by Buffalo's Pop ORM.
+
+rules:
+  - "Before writing any code, ALWAYS read `AGENTS.md` and the appropriate story file in `.agents/specifications/stories/`."
+  - "Do not use React. Use Svelte 5 (Runes syntax) for all frontend components."
+  - "Do not write plain CSS. Use Tailwind CSS v4 and DaisyUI component classes exclusively."
+  - "Do not manually edit the database schema. Always use `buffalo pop generate fizz <name>` to create migrations."
+  - "To run the application locally, use `npm run dev` and `buffalo dev` in separate terminals."
+
+commands:
+  # The command the agent runs to test its changes.
+  test: "make test"
+
+  # The command the agent runs to verify compilation.
+  build: "make build"
+
+  # Formatting command to run before committing
+  format: "make lint"
+
+  # Setup command if the agent spins up an ephemeral environment
+  setup: "make setup"
+
+# Directories that agents should prioritize or ignore
+sandbox:
+  install:
+    - "npm install"
+    - "go mod download"
+  test:
+    - "make test"

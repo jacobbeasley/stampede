@@ -1,0 +1,7 @@
+sql("INSERT INTO roles (id, role_name, created_at, updated_at) VALUES ('USER', 'User', NOW(), NOW());")
+sql("INSERT INTO roles (id, role_name, created_at, updated_at) VALUES ('ADMIN', 'Administrator', NOW(), NOW());")
+
+sql("INSERT INTO user_roles (id, user_id, role_id, created_at, updated_at) SELECT gen_random_uuid(), id, 'USER', NOW(), NOW() FROM users WHERE is_admin = false;")
+sql("INSERT INTO user_roles (id, user_id, role_id, created_at, updated_at) SELECT gen_random_uuid(), id, 'ADMIN', NOW(), NOW() FROM users WHERE is_admin = true;")
+
+drop_column("users", "is_admin")

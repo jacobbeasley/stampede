@@ -1,0 +1,19 @@
+<%= if (pagination) { %>
+  <%= if (pagination.TotalPages > 1) { %>
+    <div class="join">
+      <%= if (pagination.HasPrevious) { %>
+        <a class="join-item btn btn-sm" href="<%= paginationPath({page: pagination.PreviousPage}) %>">«</a>
+      <% } else { %>
+        <button class="join-item btn btn-sm btn-disabled">«</button>
+      <% } %>
+
+      <button class="join-item btn btn-sm">Page <%= pagination.Page %> of <%= pagination.TotalPages %></button>
+
+      <%= if (pagination.HasNext) { %>
+        <a class="join-item btn btn-sm" href="<%= paginationPath({page: pagination.NextPage}) %>">»</a>
+      <% } else { %>
+        <button class="join-item btn btn-sm btn-disabled">»</button>
+      <% } %>
+    </div>
+  <% } %>
+<% } %>

@@ -1,0 +1,57 @@
+<div class="container mx-auto px-4 py-8 max-w-3xl">
+  <div class="mb-6 flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <a href="/admin/users" class="btn btn-ghost btn-sm">← Back</a>
+      <h1 class="text-3xl font-bold">User Details</h1>
+    </div>
+    <div class="flex gap-2">
+      <a href="/admin/users/<%= user.ID %>/edit" class="btn btn-primary btn-sm">Edit User</a>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title text-xl mb-4"><%= user.DisplayName() %></h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <span class="block text-sm font-medium opacity-70 mb-1">Email Address</span>
+          <span><%= user.Email %></span>
+        </div>
+
+        <div>
+          <span class="block text-sm font-medium opacity-70 mb-1">User ID</span>
+          <span class="font-mono text-sm bg-base-200 p-1 rounded"><%= user.ID %></span>
+        </div>
+        
+        <div>
+          <span class="block text-sm font-medium opacity-70 mb-1">First Name</span>
+          <span><%= if (user.FirstName.Valid && user.FirstName.String != "") { %><%= user.FirstName.String %><% } else { %><span class="opacity-50 italic">Not set</span><% } %></span>
+        </div>
+
+        <div>
+          <span class="block text-sm font-medium opacity-70 mb-1">Last Name</span>
+          <span><%= if (user.LastName.Valid && user.LastName.String != "") { %><%= user.LastName.String %><% } else { %><span class="opacity-50 italic">Not set</span><% } %></span>
+        </div>
+
+        <div>
+          <span class="block text-sm font-medium opacity-70 mb-1">Member Since</span>
+          <span><%= user.CreatedAt.Format("Jan 02, 2006 15:04:05") %></span>
+        </div>
+        
+        <div class="col-span-1 md:col-span-2 mt-2">
+          <span class="block text-sm font-medium opacity-70 mb-2">Roles in this Organization</span>
+          <div class="flex gap-2 flex-wrap">
+            <%= if (user.Roles && len(user.Roles) > 0) { %>
+              <%= for (role) in user.Roles { %>
+                <span class="badge <%= if (role.ID=="ADMIN" || role.ID=="SUPER_ADMIN") { %>badge-primary<% } else { %>badge-ghost<% } %>"><%= role.RoleName %></span>
+              <% } %>
+            <% } else { %>
+              <span class="text-sm opacity-50">No specific roles assigned.</span>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

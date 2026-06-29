@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    command: sleep infinity
+    volumes:
+      - ..:/workspace:cached
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/buffalo_test_development?sslmode=disable
+      TEST_DATABASE_URL: postgres://postgres:postgres@db:5432/buffalo_test_test?sslmode=disable
+    network_mode: service:db
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
