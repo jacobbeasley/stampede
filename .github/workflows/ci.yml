@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: buffalo_app_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.x'
+          cache: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          go mod download
+          npm ci
+
+      - name: Install Buffalo and Soda CLIs
+        run: |
+          go install github.com/gobuffalo/pop/v6/soda@latest
+          go install github.com/gobuffalo/cli/cmd/buffalo@latest
+
+      - name: Set up Test Database
+        env:
+          TEST_DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/buffalo_app_test?sslmode=disable
+        run: |
+          soda create -e test
+          soda migrate -e test
+
+      - name: Run Go Tests
+        env:
+          TEST_DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/buffalo_app_test?sslmode=disable
+        run: |
+          make test
+
+      - name: Install Playwright Chromium Browser
+        run: npx playwright install chromium --with-deps
+
+      - name: Run Playwright E2E Tests
+        env:
+          GO_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/buffalo_app_test?sslmode=disable
+          TEST_DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/buffalo_app_test?sslmode=disable
+        run: npx playwright test
+
