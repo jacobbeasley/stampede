@@ -111,7 +111,7 @@ test.describe('Authentication and User Flows', () => {
     let resetToken = '';
     let userId = '';
     try {
-      const dbQuery = `sudo -u postgres psql -d buffalo_test_test -t -c "SELECT id, reset_token FROM users WHERE email = '${randomEmail}';"`;
+      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT id, reset_token FROM users WHERE email = '${randomEmail}';"`;
       const output = execSync(dbQuery).toString().trim();
       const parts = output.split('|').map(p => p.trim());
       userId = parts[0];
@@ -153,7 +153,7 @@ test.describe('Authentication and User Flows', () => {
     // Extract NEW reset token
     let newResetToken = '';
     try {
-      const dbQuery = `sudo -u postgres psql -d buffalo_test_test -t -c "SELECT reset_token FROM users WHERE email = '${randomEmail}';"`;
+      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT reset_token FROM users WHERE email = '${randomEmail}';"`;
       newResetToken = execSync(dbQuery).toString().trim();
     } catch (e) {
       console.error("Failed to extract new reset token", e);

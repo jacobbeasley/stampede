@@ -22,8 +22,8 @@ async function globalSetup() {
     form: {
       authenticity_token: csrfToken,
       Email: 'admin@example.com',
-      Password: 'password',
-      PasswordConfirmation: 'password',
+      Password: 'password123',
+      PasswordConfirmation: 'password123',
     },
   });
 
