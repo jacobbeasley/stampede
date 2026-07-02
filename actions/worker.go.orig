@@ -27,10 +27,4 @@ func init() {
 		link := args["link"].(string)
 		return mailers.SendAdminPasswordReset(email, link)
 	})
-
-	w.Register("send_verification", func(args worker.Args) error {
-		email := args["email"].(string)
-		link := args["link"].(string)
-		return mailers.SendVerification(email, link)
-	})
 }

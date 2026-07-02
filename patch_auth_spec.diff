@@ -1,0 +1,20 @@
+--- tests/e2e/auth.spec.ts
++++ tests/e2e/auth.spec.ts
+@@ -109,7 +109,7 @@
+     let resetToken = '';
+     let userId = '';
+     try {
+-      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT id, reset_token FROM users WHERE email = '${randomEmail}';"`;
++      const dbQuery = `sudo -u postgres psql -d buffalo_test_test -t -c "SELECT id, reset_token FROM users WHERE email = '${randomEmail}';"`;
+       const output = execSync(dbQuery).toString().trim();
+       const parts = output.split('|').map(p => p.trim());
+       userId = parts[0];
+@@ -142,7 +142,7 @@
+     // Extract NEW reset token
+     let newResetToken = '';
+     try {
+-      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT reset_token FROM users WHERE email = '${randomEmail}';"`;
++      const dbQuery = `sudo -u postgres psql -d buffalo_test_test -t -c "SELECT reset_token FROM users WHERE email = '${randomEmail}';"`;
+       newResetToken = execSync(dbQuery).toString().trim();
+     } catch (e) {
+       console.error("Failed to extract new reset token", e);
