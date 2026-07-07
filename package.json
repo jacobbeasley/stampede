@@ -14,7 +14,7 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
-    "@tailwindcss/vite": "^4.3.0",
+    "@tailwindcss/vite": "^4.3.1",
     "daisyui": "^5.5.19",
     "svelte": "^5.55.7",
     "tailwindcss": "^4.3.0",
