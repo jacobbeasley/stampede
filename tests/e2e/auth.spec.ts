@@ -1,6 +1,17 @@
 import { test, expect } from '@playwright/test';
 import { execSync } from 'child_process';
 
+function buildPsqlCommand(query: string): string {
+  const dbUrl = process.env.TEST_DATABASE_URL || 'postgres://postgres:postgres@127.0.0.1:5432/buffalo_app_test?sslmode=disable';
+  // Extract the Unix socket path from the Go-specific host query parameter
+  const hostMatch = dbUrl.match(/[?&]host=([^&]+)/);
+  if (hostMatch) {
+    const cleanUrl = dbUrl.replace(/[?&]host=[^&]+/, '');
+    return `psql "${cleanUrl}" -t -c "${query}"`;
+  }
+  return `psql "${dbUrl}" -t -c "${query}"`;
+}
+
 test.describe('Authentication and User Flows', () => {
   test('admin user can login and logout', async ({ page }) => {
     // Go to login page
@@ -111,7 +122,7 @@ test.describe('Authentication and User Flows', () => {
     let resetToken = '';
     let userId = '';
     try {
-      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT id, reset_token FROM users WHERE email = '${randomEmail}';"`;
+      const dbQuery = buildPsqlCommand(`SELECT id, reset_token FROM users WHERE email = '${randomEmail}'`);
       const output = execSync(dbQuery).toString().trim();
       const parts = output.split('|').map(p => p.trim());
       userId = parts[0];
@@ -153,7 +164,7 @@ test.describe('Authentication and User Flows', () => {
     // Extract NEW reset token
     let newResetToken = '';
     try {
-      const dbQuery = `sudo -u postgres psql -d buffalo_app_test -t -c "SELECT reset_token FROM users WHERE email = '${randomEmail}';"`;
+      const dbQuery = buildPsqlCommand(`SELECT reset_token FROM users WHERE email = '${randomEmail}'`);
       newResetToken = execSync(dbQuery).toString().trim();
     } catch (e) {
       console.error("Failed to extract new reset token", e);

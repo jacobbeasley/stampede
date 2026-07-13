@@ -10,6 +10,12 @@ var w worker.Worker
 func init() {
 	w = worker.NewSimple()
 
+	w.Register("send_verification", func(args worker.Args) error {
+		email := args["email"].(string)
+		link := args["link"].(string)
+		return mailers.SendVerification(email, link)
+	})
+
 	w.Register("send_password_reset", func(args worker.Args) error {
 		email := args["email"].(string)
 		link := args["link"].(string)
