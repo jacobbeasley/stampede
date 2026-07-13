@@ -131,7 +131,7 @@ func ProfilePasswordUpdate(c buffalo.Context) error {
 	u.PasswordConfirmation = passwordConfirmation
 
 	if err := u.BeforeUpdate(tx); err != nil {
-	    return err
+		return err
 	}
 
 	verrs, err := tx.ValidateAndUpdate(u)
