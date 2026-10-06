@@ -84,7 +84,7 @@ Now open **[http://localhost:3000](http://localhost:3000)** in your browser!
 |---|---|---|
 | Backend framework | [Buffalo](https://gobuffalo.io/) | v1.1.4 |
 | Language | Go | 1.26+ |
-| ORM | [Pop](https://gobuffalo.io/documentation/database/pop/) (gobuffalo/pop/v6) | v6.3 |
+| ORM | [Pop](https://gobuffalo.io/documentation/database/pop/) (gobuffalo/pop/v6) | v6.4.1 |
 | Database | PostgreSQL | 17+ |
 | Template engine | [Plush](https://github.com/gobuffalo/plush) | v5 |
 | Frontend framework | [Svelte](https://svelte.dev/) | v5 (Runes syntax) |
