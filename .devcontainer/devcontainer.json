@@ -1,9 +1,9 @@
 {
   "name": "Buffalo Full Stack",
-  "image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/go:1-1.26-bookworm",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
+      "version": "22"
     },
     "ghcr.io/devcontainers-contrib/features/postgresql-client:1": {},
     "ghcr.io/devcontainers-contrib/features/buffalo:1": {}
@@ -28,7 +28,7 @@
     }
   },
   "forwardPorts": [3000, 3001, 5432],
-  "postCreateCommand": "go install github.com/gobuffalo/cli/cmd/buffalo@latest && make setup",
+  "postCreateCommand": "go install github.com/gobuffalo/cli/cmd/buffalo@v0.18.14 && make setup",
   "remoteUser": "vscode",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",

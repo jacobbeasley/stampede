@@ -28,8 +28,8 @@ Get the application up and running locally in three quick steps:
    # Install backend & frontend dependencies
    go mod download
    npm install
-   go install github.com/gobuffalo/cli/cmd/buffalo@latest
-   go install github.com/gobuffalo/buffalo-pop/v3@latest
+   go install github.com/gobuffalo/cli/cmd/buffalo@v0.18.14
+   go install github.com/gobuffalo/buffalo-pop/v3@v3.0.7
 
    # Copy the sample environment file
    cp .env.sample .env
@@ -85,7 +85,7 @@ Now open **[http://localhost:3000](http://localhost:3000)** in your browser!
 | Backend framework | [Buffalo](https://gobuffalo.io/) | v1.1.4 |
 | Language | Go | 1.26+ |
 | ORM | [Pop](https://gobuffalo.io/documentation/database/pop/) (gobuffalo/pop/v6) | v6.3 |
-| Database | PostgreSQL | 14+ |
+| Database | PostgreSQL | 17+ |
 | Template engine | [Plush](https://github.com/gobuffalo/plush) | v5 |
 | Frontend framework | [Svelte](https://svelte.dev/) | v5 (Runes syntax) |
 | Frontend build tool | [Vite](https://vitejs.dev/) | v8 |
@@ -151,10 +151,10 @@ buffalo-app/
 | Tool | Install |
 |---|---|
 | **Go 1.26+** | https://go.dev/dl/ |
-| **Buffalo CLI v0.18+** | `go install github.com/gobuffalo/cli/cmd/buffalo@latest` |
-| **Node.js 18+** | https://nodejs.org/ |
+| **Buffalo CLI v0.18.14** | `go install github.com/gobuffalo/cli/cmd/buffalo@v0.18.14` |
+| **Node.js 22+** | https://nodejs.org/ |
 | **npm 9+** | Included with Node.js |
-| **PostgreSQL 14+** | https://www.postgresql.org/download/ |
+| **PostgreSQL 17+** | https://www.postgresql.org/download/ |
 
 ### Windows Only
 - **Git Bash** or **WSL2** recommended for a Unix-like shell experience.
@@ -345,7 +345,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:14-alpine
+    image: postgres:17-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -631,4 +631,3 @@ We welcome contributions to this project! When contributing, please follow these
 
 ### Testing
 - Run all automated tests locally to verify your changes. Refer to the **Running Tests** section above for environment setup commands.
-
